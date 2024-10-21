@@ -270,6 +270,21 @@ header nav div a:hover {
   color: #333;
 }
 
+/* checkout */
+
+.checkout-list li {
+  list-style: none; 
+  margin-bottom: 10px; 
+}
+
+.checkout-list li span {
+  display: block;
+  margin-bottom: 8px; 
+  font-size: 16px;
+}
+
+
+
 /* order processing */
 
 .orders-container {
