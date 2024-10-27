@@ -6,12 +6,11 @@ const OrderProcessingList = ({ order }) => {
 
     //mawala man ang mga drinks
     //sa dispatch na siya
-    const { orders, dispatch } = useOrdersContext();
+    const { dispatch } = useOrdersContext();
     const { user } = useAuthContext();
 
-    console.log('hoy', orders);
 
-    const handleUpdate = async (e) => {
+    const handleDelivery = async (e) => {
         e.stopPropagation();
 
         const updatedOrder = { ...order, status: "delivered"}
@@ -26,15 +25,31 @@ const OrderProcessingList = ({ order }) => {
         })
 
         const json = await response.json();
-        console.log('Updated order', json);
 
         if (response.ok) {
-            dispatch({ type: "UPDATE_ORDER", payload: json });
+            dispatch({ type: 'UPDATE_ORDER', payload: json });
         }
 
     }
     
 
+    const handleSuccessOrder = async (e) => {
+        e.stopPropagation();
+
+        const response = await fetch('/matcha/orders/' + order._id, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${user.token}`
+            }
+        })
+
+        const json = await response.json();
+
+        if (response.ok) {
+            dispatch({ type: 'DELETE_ORDER', payload: json._id });
+        }
+        
+    }
 
 
 
@@ -55,7 +70,9 @@ const OrderProcessingList = ({ order }) => {
                         </li>
                     ))}
                 </ul>
-            <button className="order-button" onClick={handleUpdate}>Confirmed and for Delivery</button>
+                
+            <button className="order-button" onClick={handleDelivery}><i className="bi bi-send"></i> Confirmed and for Delivery</button>
+            <button className="order-button" onClick={handleSuccessOrder}><i className="bi bi-truck"></i> Delivered Successfully</button>
             </div>
         </div>
                         

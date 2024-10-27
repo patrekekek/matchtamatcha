@@ -90,7 +90,11 @@ const updateOrder = async (req, res) => {
         return res.status(404).json({error: 'No such order'});
     }
 
-    const updatedOrder = await Order.findOneAndUpdate({ _id: id }, { ...req.body }, { new: true });
+    const updatedOrder = await Order.findOneAndUpdate(
+        { _id: id },
+        { ...req.body },
+        { new: true }
+    ).populate('drinks.drink');
 
     if(!updatedOrder) {
         return res.status(400).json({ error: 'No such order'});
@@ -101,10 +105,30 @@ const updateOrder = async (req, res) => {
 }
 
 
+const deleteOrder = async (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'No such order' });
+    }
+
+    const order = await Order.findOneAndDelete({ _id: id });
+
+    if (!order) {
+        return res.status(404).json({ error: 'No such order' })
+    }
+
+    res.status(200).json(order);
+
+}
+
+
+
 
 module.exports = {
     getOrders,
     getOrder,
     orderDrinks,
-    updateOrder
+    updateOrder,
+    deleteOrder
 }

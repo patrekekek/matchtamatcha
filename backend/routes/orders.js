@@ -3,7 +3,8 @@ const {
     getOrders,
     getOrder,
     orderDrinks,
-    updateOrder
+    updateOrder,
+    deleteOrder
 } = require('../controllers/orderController');
 
 
@@ -26,6 +27,10 @@ router.put('/', verifyToken, orderDrinks);
 
 
 //update order
-router.patch('/:id', updateOrder);
+router.patch('/:id', verifyToken, updateOrder);
+
+
+//delete order
+router.delete('/:id', verifyToken, deleteOrder);
 
 module.exports = router;

@@ -15,8 +15,8 @@ export const ordersReducer = (state, action) => {
         case 'DELETE_ORDER':
             return {
                 ...state,
-                orders: {}
-            }
+                orders: state.orders.filter((order) => order._id !== action.payload)
+            };
         case 'UPDATE_ORDER':
             return {
                 ...state,
@@ -29,7 +29,7 @@ export const ordersReducer = (state, action) => {
 
 export const OrdersContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(ordersReducer, {
-        orders: {}
+        orders: []
     });
 
     return (

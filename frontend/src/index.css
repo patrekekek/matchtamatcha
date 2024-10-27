@@ -185,7 +185,8 @@ header nav div a:hover {
 .order-summary-container {
   margin-top: 20px;
   display: flex;
-  justify-content: space-between;
+  margin: 0 auto;
+  justify-content: center;
   align-items: center;
   padding: 15px;
   background-color: #f0f7ee;
@@ -197,6 +198,7 @@ header nav div a:hover {
   font-size: 18px;
   font-weight: bold;
   color: #2c3e50;
+  margin-right: 12px;
 }
 
 .order-button {
@@ -208,6 +210,7 @@ header nav div a:hover {
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s;
+  margin-right: 10px;
 }
 
 .order-button:hover {
@@ -253,7 +256,7 @@ header nav div a:hover {
 
 .order-list li {
   display: flex;
-  justify-content: flex-start; /* Adjusts the spacing */
+  justify-content: flex-start;
   padding: 10px;
   background-color: #fff;
   border-radius: 5px;
@@ -262,7 +265,7 @@ header nav div a:hover {
 }
 
 .order-list li span:first-child {
-  margin-right: 20px; /* Add some margin to the right of the quantity */
+  margin-right: 20px;
 }
 
 .order-list span {

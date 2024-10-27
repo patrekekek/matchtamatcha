@@ -24,7 +24,7 @@ const useFetchOrders = () => {
                 });
                 
                 const json = await response.json();
-                console.log('all orders', json);
+                
                 if (response.ok) {
                     dispatch({ type: 'SET_ORDER', payload: json });
 

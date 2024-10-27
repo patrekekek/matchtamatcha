@@ -1,15 +1,17 @@
 import { useState, useEffect } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
+import { useOrdersContext } from '../hooks/useOrdersContext';
 
 
 const Order = () => {
 
     const { user } = useAuthContext();
+    const { dispatch } = useOrdersContext();
     const [order, setOrder] = useState({});
     const [loading, setLoading] = useState(true);
 
-    console.log('order', order.drinks)
 
+    console.log('order', order);
     useEffect(() => {
         const fetchOrder = async () => {
     
@@ -41,8 +43,32 @@ const Order = () => {
             }
         };
         fetchOrder();
-    }, [user]);
+    }, [user, order._id]);
     
+
+    const handleReceived = async (e) => {
+        e.stopPropagation();
+
+        const updatedOrder = { ...order, status: "received" }
+
+        const response = await fetch('/matcha/orders/' + order._id, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
+            },
+            body: JSON.stringify(updatedOrder)
+        })
+
+        const json = await response.json();
+
+        if (response.ok) {
+            setOrder({ ...order, status: "received" });
+            dispatch({ type: 'UPDATE_ORDER', payload: json});
+        }
+    }
+
+
 
 
     if (loading) {
@@ -52,7 +78,7 @@ const Order = () => {
     }
 
     return (
-        <div className="order-container">
+        <div className="order-container" key={order._id}>
             <h1>Your Order</h1>
             <p>Order Number: <strong>#{order._id}</strong></p>
             <p>Total: <strong>₱{order.totalPrice}</strong></p>
@@ -71,6 +97,7 @@ const Order = () => {
                     <p>No orders available.</p>
                 )}
             </div>
+            <button className="order-button" onClick={handleReceived}>Order Received</button>
         </div>
     );
 };
