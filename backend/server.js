@@ -1,4 +1,6 @@
-require('dotenv').config();
+// require('dotenv').config();
+
+const dotenv = require('dotenv');
 
 const express = require('express');
 const mongoose = require('mongoose');
@@ -8,6 +10,9 @@ const userRoutes = require('./routes/user');
 
 // express app
 const app = express();
+
+// env config
+dotenv.config({ path: `.env.${process.env.NODE_ENV || 'development'}` });
 
 // middleware
 app.use(express.json()); 
