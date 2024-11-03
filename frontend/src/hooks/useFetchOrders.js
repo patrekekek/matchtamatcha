@@ -17,7 +17,7 @@ const useFetchOrders = () => {
             }
 
             try {
-                const response = await fetch('/matcha/orders', {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/matcha/orders`, {
                     headers: {
                         'Authorization': `Bearer ${user.token}`
                     }

@@ -10,7 +10,7 @@ export const useSignup = () => {
         setIsLoading(true);
         setError(null);
 
-        const response = await fetch('/matcha/user/signup', {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/matcha/user/signup`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
