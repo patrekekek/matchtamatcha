@@ -21,7 +21,7 @@ const Order = () => {
             }
     
             try {
-                const response = await fetch(`/matcha/orders/${user.id}`, {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/matcha/orders/${user.id}`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${user.token}`
@@ -51,7 +51,7 @@ const Order = () => {
 
         const updatedOrder = { ...order, status: "received" }
 
-        const response = await fetch('/matcha/orders/' + order._id, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/matcha/orders/` + order._id, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

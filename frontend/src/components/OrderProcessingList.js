@@ -15,7 +15,7 @@ const OrderProcessingList = ({ order }) => {
 
         const updatedOrder = { ...order, status: "delivered"}
 
-        const response = await fetch('/matcha/orders/' + order._id, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/matcha/orders/` + order._id, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ const OrderProcessingList = ({ order }) => {
     const handleSuccessOrder = async (e) => {
         e.stopPropagation();
 
-        const response = await fetch('/matcha/orders/' + order._id, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/matcha/orders/` + order._id, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${user.token}`

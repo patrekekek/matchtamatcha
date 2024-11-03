@@ -40,7 +40,7 @@ const UpdatedMenu = () => {
         
         const updateDrinks = async (updatedDrinkList) => {
             try {
-                const response = await fetch('/matcha/drinks/update', {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/matcha/drinks/update`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',

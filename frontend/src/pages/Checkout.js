@@ -20,7 +20,7 @@ const Checkout = () => {
 
         const sendOrder = async (requestData) => {
             try {
-                const response = await fetch('/matcha/orders', {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/matcha/orders`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
