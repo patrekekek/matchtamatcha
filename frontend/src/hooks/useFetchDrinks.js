@@ -23,6 +23,7 @@ const useFetchDrinks = () => {
 
 
     useEffect(() => {
+        console.log('API URL:', process.env.REACT_APP_API_URL);
         const fetchDrinks = async () => {
             try {
                 const response = await fetch(`${process.env.REACT_APP_API_URL}/matcha/drinks`);

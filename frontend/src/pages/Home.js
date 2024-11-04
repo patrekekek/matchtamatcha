@@ -19,8 +19,7 @@ const Home = () => {
     const [selectedDrinks, setSelectedDrinks] = useState({});
     const navigate = useNavigate();
 
-    console.log(drinks)
-    console.log('selected drinks', selectedDrinks);
+    console.log('user', user);
 
     const handleIncrement = (drinkId) => {
         const drink = drinks.find(d => d._id === drinkId);
@@ -61,6 +60,12 @@ const Home = () => {
     };
 
     const handleClick = () => {
+
+        if (!user) {
+            navigate('/login');
+            return;
+        }
+      
         try {
             const validDrinks = Object.keys(selectedDrinks).filter(drinkId => selectedDrinks[drinkId]?.quantity > 0);
     
@@ -68,7 +73,8 @@ const Home = () => {
                 console.error('No drinks selected');
                 return;
             }
-    
+
+   
             const requestData = {
                 drinks: validDrinks.map((drinkId) => ({
                     drink: drinkId,
